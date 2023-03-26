@@ -2,25 +2,8 @@
 #include <stdio.h>
 #include <string.h>
 
-void stampasizeof(char *s, int size) {
-    printf("%s:%d\n", s, size);
-}
 
 int main(void) {
-    stampasizeof("char", sizeof(char));
-    stampasizeof("char*", sizeof(char*));
-    stampasizeof("short", sizeof(short));
-    stampasizeof("short*", sizeof(short*));
-    stampasizeof("int", sizeof(int));
-    stampasizeof("int*", sizeof(int*));
-    stampasizeof("long", sizeof(long));
-    stampasizeof("long*", sizeof(long*));
-    stampasizeof("float", sizeof(float));
-    stampasizeof("float*", sizeof(float*));
-    stampasizeof("double", sizeof(double));
-    stampasizeof("double*", sizeof(double*));
-    stampasizeof("long double", sizeof(long double));
-    stampasizeof("long double*", sizeof(long double*));
 
     int a = 12; 
 

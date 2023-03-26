@@ -2,14 +2,34 @@
 
 void testSizeOfArray();
 void stampaArrayInteri(int arr[], int dimensione);
+void testArrayInit();
 
 int main () {
-    // Un array è una sequenza, contigua in memoria, di elementi.
-    // Dichiarazione di un array:
-    //     tipoDiDato  identificatore [dimensione];
+    //    Un array è una sequenza, contigua in memoria, di elementi.
     //
-    int arr[4];
+    //    Dichiarazione di un array:
+    //         tipoDiDato  identificatore [dimensione];
+    //
+    int arr[4];  
+    //    arr è un array di quattro interi
+    //    Questo array è dichiarato ma non inizializzato,
+    //    significa quindi che gli elementi al suo interno potrebbero avere qualsiasi valore
+
+
+    //    Dichiaro un array di 20 elementi interi senza inizializzarli
+    //
+    int arr_non_inizializzato[20]; 
+    printf("Stampo il contenuto di un array di 20 interi che non è stato inizializzato:\n");
+    for (size_t i = 0; i < 20; i++) {
+        printf("%d ", arr_non_inizializzato[i]);
+    }
     
+    printf("\nOra stampo un array inizializzato:\n");
+    int arr_inizializzato[10]= {5};  // Il primo elemeno è inizializzato con in valore 5 mentre tutti gli elementi dell'array sono inizializzati a 0
+    for (size_t i = 0; i < 10; i++) {
+        printf("%d ", arr_inizializzato[i]);
+    }
+    printf("\n");
 
     // Per accedere ad un elemento contenuto in un array si usa la sintassi:
     //     nomeArray[indice]
@@ -41,6 +61,9 @@ int main () {
     //
     int numeri_1[3]= {10, 20, 30};
     int numeri_2[]= {7, 14, 21};
+    int numeri_3[5]= {10, 20, 30}; // [10, 20, 30, 0, 0]
+    int numeri_4[50]= {0}; 
+
     printf("\n\nElementi dell'array numeri_1:\n\t");
     for(int i=0; i<3; i++) {
         printf("%d ,", numeri_1[i]);
@@ -86,6 +109,20 @@ int main () {
     // Dichiarazione 
     //
     float matrice[3][4];
+    for(int i = 0; i< 3; i++){
+        for(int j=0; i< 4; j++){
+            matrice[i][j] = 5*j*i;
+        }
+    }
+    //   0  1  2  3
+    //0 [ ][ ][ ][ ]
+    //1 [ ][ ][x][ ]
+    //2 [ ][ ][ ][ ]
+    // matrice [1][2]
+    // matrice [1][2] = nuovoValore
+
+    // float vettore [5]; 
+    // [][][][][]
     
     // Inizializzazione
     //
@@ -94,6 +131,7 @@ int main () {
 
     testSizeOfArray();
     
+    testArrayInit();
     printf("\n\n");
     return 0;
 }
@@ -125,3 +163,25 @@ void testSizeOfArray(){
     printf("\t%zu\n", sizeof p); // Stampa la dimensione del puntatore
 }
 
+
+void testArrayInit(){
+    //
+    //
+    printf("\n");
+    int another_array[5] = { [2] = 5, [4] = 9 };
+    for (size_t i = 0; i < 5; i++) {
+        printf("%d ",another_array[i]);
+    }
+    
+    printf("\n\n");
+    int new_array[25] = { [0 ... 5] = 1, [10 ... 20] = 2, 3 };
+    for (size_t i = 0; i < 25; i++) {
+        printf("%d ",new_array[i]);
+    }
+    
+    printf("\n\n");
+    int my_array[] = { 0, 1, 2, [19] = 321 };
+    for (size_t i = 0; i < 20; i++) {
+        printf("%d ",my_array[i]);
+    }
+}

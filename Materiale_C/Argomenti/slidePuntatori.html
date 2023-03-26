@@ -1,0 +1,373 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+  <meta charset="UTF-8">
+  <title>Puntatori in C</title>
+  <style>
+    /* Stili per la presentazione */
+    body {
+      font-family: sans-serif;
+    }
+
+    h1 {
+      text-align: center;
+    }
+
+    .slide {
+      display: none;
+    }
+
+    .current-slide {
+      display: block;
+    }
+
+    button {
+      margin: 10px;
+    }
+  </style>
+</head>
+
+<body>
+  <h1>Puntatori in C</h1>
+
+  <div class="slide current-slide">
+    <h2>Introduzione ai puntatori</h2>
+    <ul>
+      <li>I puntatori sono una delle caratteristiche più potenti e complesse del linguaggio C.</li>
+      <li>I puntatori sono utilizzati per manipolare direttamente la memoria del computer.</li>
+      <li>Per comprendere i puntatori, dobbiamo prima capire come funziona la memoria del computer.</li>
+    </ul>
+    <table class="">
+
+<tbody><tr>
+<th style="text-align: left"> Precedence
+</th>
+<th style="text-align: left"> Operator
+</th>
+<th style="text-align: left"> Description
+</th>
+<th style="text-align: left"> Associativity
+</th></tr>
+<tr>
+<th rowspan="6"> 1
+</th>
+<td style="border-bottom-style: none"> <code>++</code> <code>--</code>
+</td>
+<td style="border-bottom-style: none"> Suffix/postfix increment and decrement
+</td>
+<td style="vertical-align: top" rowspan="6"> Left-to-right
+</td></tr>
+<tr>
+<td style="border-bottom-style: none; border-top-style: none"> <code>()</code>
+</td>
+<td style="border-bottom-style: none; border-top-style: none"> Function call
+</td></tr>
+<tr>
+<td style="border-bottom-style: none; border-top-style: none"> <code>[]</code>
+</td>
+<td style="border-bottom-style: none; border-top-style: none"> Array subscripting
+</td></tr>
+<tr>
+<td style="border-bottom-style: none; border-top-style: none"> <code>.</code>
+</td>
+<td style="border-bottom-style: none; border-top-style: none"> Structure and union member access
+</td></tr>
+<tr>
+<td style="border-bottom-style: none; border-top-style: none"> <code>-&gt;</code>
+</td>
+<td style="border-bottom-style: none; border-top-style: none"> Structure and union member access through pointer
+</td></tr>
+<tr>
+<td style="border-bottom-style: none; border-top-style: none"> <code>(<i>type</i>){<i>list</i>}</code>
+</td>
+<td style="border-bottom-style: none; border-top-style: none"> Compound literal<span class="t-mark-rev t-since-c99">(C99)</span>
+</td></tr>
+<tr>
+<th rowspan="8"> 2
+</th>
+<td style="border-bottom-style: none"> <code>++</code> <code>--</code>
+</td>
+<td style="border-bottom-style: none"> Prefix increment and decrement<sup id="cite_ref-1" class="reference"><a href="#cite_note-1">[note 1]</a></sup>
+</td>
+<td style="vertical-align: top" rowspan="8"> Right-to-left
+</td></tr>
+<tr>
+<td style="border-bottom-style: none; border-top-style: none"> <code>+</code> <code>-</code>
+</td>
+<td style="border-bottom-style: none; border-top-style: none"> Unary plus and minus
+</td></tr>
+<tr>
+<td style="border-bottom-style: none; border-top-style: none"> <code>!</code> <code>~</code>
+</td>
+<td style="border-bottom-style: none; border-top-style: none"> Logical NOT and bitwise NOT
+</td></tr>
+<tr>
+<td style="border-bottom-style: none; border-top-style: none"> <code>(<i>type</i>)</code>
+</td>
+<td style="border-bottom-style: none; border-top-style: none"> Cast
+</td></tr>
+<tr>
+<td style="border-bottom-style: none; border-top-style: none"> <code>*</code>
+</td>
+<td style="border-bottom-style: none; border-top-style: none"> Indirection (dereference)
+</td></tr>
+<tr>
+<td style="border-bottom-style: none; border-top-style: none"> <code>&amp;</code>
+</td>
+<td style="border-bottom-style: none; border-top-style: none"> Address-of
+</td></tr>
+<tr>
+<td style="border-bottom-style: none; border-top-style: none"> <code>sizeof</code>
+</td>
+<td style="border-bottom-style: none; border-top-style: none"> Size-of<sup id="cite_ref-2" class="reference"><a href="#cite_note-2">[note 2]</a></sup>
+</td></tr>
+<tr>
+<td style="border-bottom-style: none; border-top-style: none"> <code>_Alignof</code>
+</td>
+<td style="border-bottom-style: none; border-top-style: none"> Alignment requirement<span class="t-mark-rev t-since-c11">(C11)</span>
+</td></tr>
+<tr>
+<th> 3
+</th>
+<td> <code>*</code> <code>/</code> <code>%</code>
+</td>
+<td> Multiplication, division, and remainder
+</td>
+<td style="vertical-align: top" rowspan="11"> Left-to-right
+</td></tr>
+<tr>
+<th> 4
+</th>
+<td> <code>+</code> <code>-</code>
+</td>
+<td> Addition and subtraction
+</td></tr>
+<tr>
+<th> 5
+</th>
+<td> <code>&lt;&lt;</code> <code>&gt;&gt;</code>
+</td>
+<td> Bitwise left shift and right shift
+</td></tr>
+<tr>
+<th rowspan="2"> 6
+</th>
+<td style="border-bottom-style: none"> <code>&lt;</code> <code>&lt;=</code>
+</td>
+<td style="border-bottom-style: none"> For relational operators &lt; and ≤ respectively
+</td></tr>
+<tr>
+<td style="border-top-style: none"> <code>&gt;</code> <code>&gt;=</code>
+</td>
+<td style="border-top-style: none"> For relational operators &gt; and ≥ respectively
+</td></tr>
+<tr>
+<th> 7
+</th>
+<td> <code>==</code> <code>!=</code>
+</td>
+<td> For relational = and ≠ respectively
+</td></tr>
+<tr>
+<th> 8
+</th>
+<td> <code>&amp;</code>
+</td>
+<td> Bitwise AND
+</td></tr>
+<tr>
+<th> 9
+</th>
+<td> <code>^</code>
+</td>
+<td> Bitwise XOR (exclusive or)
+</td></tr>
+<tr>
+<th> 10
+</th>
+<td> <code>|</code>
+</td>
+<td> Bitwise OR (inclusive or)
+</td></tr>
+<tr>
+<th> 11
+</th>
+<td> <code>&amp;&amp;</code>
+</td>
+<td> Logical AND
+</td></tr>
+<tr>
+<th> 12
+</th>
+<td> <code>||</code>
+</td>
+<td> Logical OR
+</td></tr>
+<tr>
+<th> 13
+</th>
+<td> <code>?:</code>
+</td>
+<td> Ternary conditional<sup id="cite_ref-3" class="reference"><a href="#cite_note-3">[note 3]</a></sup>
+</td>
+<td style="vertical-align: top" rowspan="6"> Right-to-left
+</td></tr>
+<tr>
+<th rowspan="5"> 14<sup id="cite_ref-4" class="reference"><a href="#cite_note-4">[note 4]</a></sup>
+</th>
+<td style="border-bottom-style: none"> <code>=</code>
+</td>
+<td style="border-bottom-style: none"> Simple assignment
+</td></tr>
+<tr>
+<td style="border-bottom-style: none; border-top-style: none"> <code>+=</code> <code>-=</code>
+</td>
+<td style="border-bottom-style: none; border-top-style: none"> Assignment by sum and difference
+</td></tr>
+<tr>
+<td style="border-bottom-style: none; border-top-style: none"> <code>*=</code> <code>/=</code> <code>%=</code>
+</td>
+<td style="border-bottom-style: none; border-top-style: none"> Assignment by product, quotient, and remainder
+</td></tr>
+<tr>
+<td style="border-bottom-style: none; border-top-style: none"> <code>&lt;&lt;=</code> <code>&gt;&gt;=</code>
+</td>
+<td style="border-bottom-style: none; border-top-style: none"> Assignment by bitwise left shift and right shift
+</td></tr>
+<tr>
+<td style="border-top-style: none"> <code>&amp;=</code> <code>^=</code> <code>|=</code>
+</td>
+<td style="border-top-style: none"> Assignment by bitwise AND, XOR, and OR
+</td></tr>
+<tr>
+<th> 15
+</th>
+<td> <code>,</code>
+</td>
+<td> Comma
+</td>
+<td> Left-to-right
+</td></tr></tbody></table>
+  </div>
+
+  <div class="slide">
+    <h2>La memoria del computer</h2>
+    <ul>
+      <li>La memoria del computer è una sequenza di celle di memoria.</li>
+      <li>Ogni cella di memoria ha un indirizzo univoco che la identifica.</li>
+      <li>Ogni cella di memoria può contenere un valore.</li>
+      <li>Il tipo di dato determina quanti byte occupa una cella di memoria.</li>
+    </ul>
+  </div>
+
+  <div class="slide">
+    <h2>Dichiarazione di un puntatore</h2>
+    <ul>
+      <li>Un puntatore è una variabile che contiene l'indirizzo di una cella di memoria.</li>
+      <li>La dichiarazione di un puntatore richiede un tipo di dato.</li>
+      <li>Il tipo di dato del puntatore deve corrispondere al tipo di dato del valore che si vuole puntare.</li>
+      <li>La sintassi:
+        <pre>
+          tipo_dato *nome_puntatore;
+        </pre>
+      </li>
+    </ul>
+  </div>
+
+  <div class="slide">
+    <h2>Operatore di indirizzo &</h2>
+    <ul>
+      <li>L'operatore di indirizzo & restituisce l'indirizzo di una variabile.</li>
+      <li>Per assegnare l'indirizzo di una variabile a un puntatore, utilizziamo l'operatore di indirizzo &.</li>
+      <li>Esempio:
+        <pre>
+          int a = 10;
+          int *p = &a;
+          printf("Il valore di a è %d\n", a);
+          printf("L'indirizzo di a è %p\n", &a);
+          printf("Il valore puntato da p è %d\n", *p);
+        </pre>
+      </li>
+    </ul>
+  </div>
+
+  <div class="slide">
+    <h2>Operazioni con i puntatori</h2>
+    <ul>
+      <li>Un puntatore può essere incrementato o decrementato.</li>
+      <li>L'operazione di incremento o decremento dipende dal tipo di dato puntato dal puntatore.</li>
+      <li>Esempio:
+        <pre>
+          int a[] = {1, 2, 3, 4, 5};
+          int *p = a;
+          printf("Il primo elemento di a è %d\n", *p);
+          p++;
+          printf("Il secondo elemento di a è %d\n", *p);
+        </pre>
+      </li>
+    </ul>
+  </div>
+   <div class="slide">
+    <h2>Puntatori a puntatori</h2>
+    <ul>
+      <li>È possibile dichiarare un puntatore a un puntatore.</li>
+      <li>Un puntatore a un puntatore contiene l'indirizzo di un puntatore.</li>
+      <li>Esempio:
+        <pre>
+          int a = 10;
+          int *p = &a;
+          int **pp = &p;
+          printf("Valore di a: %d\n", a);  // Output: Valore di a: 10
+          printf("Valore puntato da p: %d\n", *p);  // Output: Valore puntato da p: 10
+          printf("Valore puntato da pp: %d\n", **pp);  // Output: Valore puntato da pp: 10
+        </pre>
+      </li>
+    </ul>
+  </div>
+  <!-- Pulsanti per navigare tra le slide -->
+  <div>
+    <button id="prev-btn" disabled>Indietro</button>
+    <button id="next-btn">Avanti</button>
+  </div>
+  <script>
+    const slides = document.querySelectorAll('.slide');
+    let currentSlide = 0;
+
+    function showSlide(index) {
+      slides[currentSlide].classList.remove('current-slide');
+      slides[index].classList.add('current-slide');
+      currentSlide = index;
+
+      // Disabilita il pulsante "Indietro" se siamo alla prima slide
+      if (currentSlide === 0) {
+        document.querySelector('#prev-btn').disabled = true;
+      } else {
+        document.querySelector('#prev-btn').disabled = false;
+      }
+
+      // Disabilita il pulsante "Avanti" se siamo all'ultima slide
+      if (currentSlide === slides.length - 1) {
+        document.querySelector('#next-btn').disabled = true;
+      } else {
+         document.querySelector('#next-btn').disabled = false;
+  }
+}
+
+function prevSlide() {
+  showSlide(currentSlide - 1);
+}
+
+function nextSlide() {
+  showSlide(currentSlide + 1);
+}
+
+// Aggiunge gli event listener ai pulsanti di navigazione
+document.querySelector('#prev-btn').addEventListener('click', prevSlide);
+document.querySelector('#next-btn').addEventListener('click', nextSlide);
+
+// Mostra la prima slide all'avvio
+showSlide(0);
+</script>
+</body>
+</html>
