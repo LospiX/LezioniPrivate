@@ -4,14 +4,15 @@
 void acquisisciNome(char* nome);
 
 int main(){
-    // Le stringhe sono sequenze di caratteri
-    // Un valore costante di tipo stringa è una sequenza di caratteri racchiusa tra doppi apici
-    // possono esserci: numeri, caratteri (ascii) alfabetici, spazi e simboli
+    // Le stringhe sono sequenze di caratteri.
+    //
+    // Un valore COSTANTE di tipo stringa è una sequenza di caratteri racchiusa tra doppi apici.
+    // Possono contenere: caratteri numerici, caratteri (ascii) alfabetici, spazi e simboli. TUTTI i caratteri della codifica ASCII.
     //     esempio  "bella questa stringa"
     //     esempio  " il 5% di 1000 vale 50!!!"
     //
-    // C non ha un tipo specifico per rappresentare le stringhe
-    // si usano quindi array di caratteri per rappresentare il tipo di dato
+    // Il linguaggio C non ha un tipo specifico per rappresentare le stringhe,
+    // si usano array di caratteri con il carattere speciale '\0' per rappresentarle. 
     //
     char prima_stringa[] = {'B','u','o','n','g','i','o','r','n','o','\0'};
     printf("Stampo la prima stringa:  \"%s\" \n", prima_stringa);
@@ -44,6 +45,27 @@ int main(){
     saluto[2]='a';
     saluto[3]='o';
     saluto[4]='\0';
+
+    // ----------------------------------------
+    // NOTA IMPORTANTE:  DIFFERENZA TRA ARRAY DI STRINGHE E PUNTATORI
+    //
+    // se si definisce un array di caratteri (e.g. char arr[25]) 
+    // è possibile assegnargli una stringa "costante" SOLO durante la dichiarazione
+    //
+    char nome[25] = "Pierfrancesco"; // VALIDO
+    char cognome[25];
+    // cognome = "Vinorelli"; // NON VALIDO !!!
+
+    // Non risulta questo problema quando 
+    char* cognome2; 
+    cognome2 = "Vinorelli"; // VALIDO
+    
+    // ALTRA NOTA IMPORTANTE 
+    // Non è possibile modificare le stringhe costanti, bisogna fare attenzione con i puntatori.
+    //
+    char* provincia = "Milato";
+    // provincia[4] = 'n';  Eseguire questa istruzione causa CRUSH dell'esecuzione.
+    // ----------------------------------------
 
     // Per calcolare la lunghezza di una stringa -> usare la funzione  strlen( stringa )  importando la libreria <string.h>
     // Il carattere terminale non è considerato nel calcolo della lunghezza di una stringa  

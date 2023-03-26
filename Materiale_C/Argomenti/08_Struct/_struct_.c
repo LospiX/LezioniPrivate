@@ -3,13 +3,32 @@
 // Il tipo di dato STRUCT è un tipo composto.
 // Permette di aggregare diversi dati sotto un'unica entità.
 // Diventa possibile organizzare gruppi di variabili legate dal punto di vista concettuale in un unico tipo di dato.
+// Dentro una struttura gli elementi che ne fanno parte sono ordinati (in ordine di dichiarazione) e contigui in memoria.
+// 
+// --------------------------
+// --->     SINTASSI     <---
+//
+//      struct NOME_STRUTTURA {
+//          ELENCO_MEMBRI
+//      }; 
+//
+// (-) Il NOME_STRUTTURA scelto diventa l'identificativo di una nuova tipologia di dato, preceduto dalla keyword "struct"
+//  |--->  è possibile creare una variabile: 
+//  |           struct NOME_STRUTTURA NOME_VARIABILE; 
+//  |
+// (-) L'elenco dei membri non ha limitazioni, possono essere di qualsiasi tipo
+//  |---> quando si crea una nuova struttura i membri vengono inizializzati con tutti i bit a 0
+// --------------------------
+//
 //
 // |----------------------------------------------------------------------------->
+// Perchè è utile avere a disposizione questo nuovo dato??
+//
 // Si pensi ad una gruppo di persone e si immagini di voler acquisire in un programma 
 // diverse informazioni (nome, cognome, età, statura, soldiInBanca) di ogni persona.
 // 
 // Le struct sono di grande supporto per la risoluzione di questo problema: 
-//  (1) -> definiamo una struct con identificativo Persona e definiamo tutti i dati che ne faranno parte
+//  (1) -> definiamo una struct con identificativo Persona e definiamo tutti i dati che ne fanno parte
 //
 //  struct Persona {
 //      char* nome;
@@ -37,7 +56,8 @@
 //  sabrina.cognome = "Poletti";
 
 
-
+// Dichiarazione di strutture per la rappresentazione di vettori geometrici nel piano e nello spazio
+//
 struct Vet2D {
     int x; 
     int y; 
@@ -49,20 +69,36 @@ typedef struct {
     int z;
 } Vet3D; 
 
+
+// Come detto una struttura è un dato composto,
+// una struttura al suo interno può contenere altre strutture come componenti di essa.
+// 
 struct point {
     int x, y;
 };
 
 struct rectangle {
-    struct point top_left, bottom_right;
+    struct point top_right, top_left, bottom_left, bottom_right;
 };
 
-struct rectangle rettangolo = { {0, 5}, {10, 0} };
+// Inizializzo un rettangolo fatto in questa maniera: 
+//    (0,5) +-----------+  (10,5)
+//          |           |
+//    (0,0) +-----------+  (10,0)
+// 
+struct rectangle rettangolo = { {10, 5}, {0, 5}, {0, 0}, {10, 0} };
 
-// Prototipi delle funzioni
+
+
+// Funzioni che saranno utili per mostrare in output i valori contenuti nelle strutture
 //
-void stampaVettore3D(Vet3D); // Usando typedef non è necessaria la keyword struct.
-void stampaVettore2D(struct Vet2D); // La classica definizione richiede invece la ripetizione
+void stampaVettore2D(struct Vet2D vet){
+    printf ("Il vettore 2D ha coordinate: (%d, %d).\n",  vet.x, vet.y);
+}
+
+void stampaVettore3D(Vet3D vet){
+    printf ("Il vettore 3D ha coordinate: (%d, %d, %d).\n",  vet.x, vet.y, vet.z);
+}
 
 int main(){
     printf("\n");
@@ -112,15 +148,9 @@ int main(){
     stampaVettore3D(b);
 
 
+    // L'operatore di confronto ' == ' non è valido tra due struttore
     // if( b==c ){ ... } Errore di compilazione, non è possibile utilizzare gli operatori di confronto tra due struct.
-
+    //
     return 0;
 }
 
-void stampaVettore2D(struct Vet2D vet){
-    printf ("Il vettore 2D ha coordinate: (%d, %d).\n",  vet.x, vet.y);
-}
-
-void stampaVettore3D(Vet3D vet){
-    printf ("Il vettore 3D ha coordinate: (%d, %d, %d).\n",  vet.x, vet.y, vet.z);
-}
