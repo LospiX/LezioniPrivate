@@ -22,6 +22,7 @@ int main(){
         double b;
         double c;
     } pollo;
+
     
     strcpy(pollo.nome, "Paolo");
     printf("Dentro la struct pollo il membro nome ha valore %s\n", pollo.nome);
@@ -33,8 +34,24 @@ int main(){
     printf("%d %f %f", gatto.a, gatto.b, gatto.c);
     
 
+    // ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+    // ==============================
+    //         ESEMPIO <<< Prova di test >>>
+    // :::DESCRIZIONE:::
+    // sdkajkasjdk
+    // ==============================
+    printf("\n\n>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>\n");
+    printf("==== INIZIO ESEMPIO <%s> ====\n\n", "Prova di test");
+    
+    printf("Hi");
+    
+    printf("\n\n====  FINE ESEMPIO <%s> ====\n", "Prova di test");
+    printf("<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<\n");
+    // ..............................   
     
 
+
+    
     printf("\n\n\t  ~~~~~~~~~~~~~~~~~~~~~~~\n");
     printf("\t FINE ESECUZIONE PROGRAMMA");
     printf("\n\t  ~~~~~~~~~~~~~~~~~~~~~~~\n\n");

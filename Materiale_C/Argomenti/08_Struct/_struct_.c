@@ -69,27 +69,6 @@ typedef struct {
     int z;
 } Vet3D; 
 
-
-// Come detto una struttura è un dato composto,
-// una struttura al suo interno può contenere altre strutture come componenti di essa.
-// 
-struct point {
-    int x, y;
-};
-
-struct rectangle {
-    struct point top_right, top_left, bottom_left, bottom_right;
-};
-
-// Inizializzo un rettangolo fatto in questa maniera: 
-//    (0,5) +-----------+  (10,5)
-//          |           |
-//    (0,0) +-----------+  (10,0)
-// 
-struct rectangle rettangolo = { {10, 5}, {0, 5}, {0, 0}, {10, 0} };
-
-
-
 // Funzioni che saranno utili per mostrare in output i valori contenuti nelle strutture
 //
 void stampaVettore2D(struct Vet2D vet){
@@ -151,6 +130,109 @@ int main(){
     // L'operatore di confronto ' == ' non è valido tra due struttore
     // if( b==c ){ ... } Errore di compilazione, non è possibile utilizzare gli operatori di confronto tra due struct.
     //
+
+    //---------------------------------------------------------------------------------
+    // ===================================================================
+    //                 INIZIALIZZAZIONE DI UNA STRUTTURA
+    // ===================================================================
+    //
+    printf("\n\n===> ESEMPI DI INIZIALIZZAZIONE DI STRUTTURE\n\n");
+    
+    // ----------------------------------
+    // Assegnazione dei valori ad ogni membro
+    //
+    struct moto {
+        char* modello; 
+        int peso; // Kg
+        int capienzaSerbatoio; // l
+        int kmPerLitro; // Km/l
+    };
+    printf("E' possibile inizializzare una struttura assegnando ad ogni membro il valore desiderato.\n");
+    struct moto primaMoto;
+    primaMoto.modello= "Yamaha";
+    primaMoto.peso= 200;
+    primaMoto.capienzaSerbatoio= 40;
+    primaMoto.kmPerLitro= 15;
+    printf("\tLa tua prima moto e' una %s di peso %d Kg.", primaMoto.modello, primaMoto.peso);
+    printf("\n\tHa un serbatoio di capienza %d litri, ed e' in grado di percorrere %d kilometri con un litro\n\n", primaMoto.capienzaSerbatoio, primaMoto.kmPerLitro);
+    
+    // ----------------------------------
+    // Inizializzazione con Parentesi Graffe
+    //
+    struct punto {double x,y,z;} p1 = {2.12, 3.5, -2.3}; // p.x= 2.12, p.y= 3.5, p.z= -2.3
+    printf("Il primo punto nel piano ha coordinate (%f, %f, %f)\n", p1.x, p1.y, p1.z);
+
+    // I valore all'interno delle graffe sono assegnati in maniera ordinata ai membri della struttura
+    // 
+    struct punto p2 = {1.2, 1.3}; // p.x= 1.2, p.y= 1.3, p.z= 0.0
+    printf("Il secondo punto nel piano ha coordinate (%f, %f, %f)\n", p2.x, p2.y, p2.z);
+    
+    // Notazione per indicare nelle graffe il preciso membro a cui assegnare il valore
+    //
+    struct punto p3 = {.z= 4.3, .x= 8.93}; // p.x=8.93, p.y=0.0, p.z=4.3
+    printf("Il terzo punto nel piano ha coordinate (%f, %f, %f)\n\n", p3.x, p3.y, p3.z);
+    
+    // ----------------------------------
+    // Inizializzazione 
+    //
+    struct animale {
+        char* nome;
+        int numeroZampe;
+    };
+    struct animale cane= {"Toby", 4};
+    printf("\n----------\n");
+    printf("Il mio animale si chiama %s ed ha %d anni.\n", cane.nome, cane.numeroZampe);
+
+    struct animale animaliDomestici []= {{"Rosita", 2}, cane, {"Aragog", 8}};
+    printf("I miei animali domestici:\n");
+    for(int i=0; i<3; i++){
+        printf("\tAnimale numero %d:  nome= %s; numero zampe: %d.\n", i+1, animaliDomestici[i].nome, animaliDomestici[i].numeroZampe);
+    }
+    
+    // Come detto una struttura è un dato composto,
+    // una struttura al suo interno può contenere altre strutture come componenti di essa.
+    //
+    struct point {
+        int x, y;
+    };
+    struct rectangle {
+        struct point top_right, top_left, bottom_left, bottom_right;
+    };
+
+    // Inizializzo un rettangolo fatto in questa maniera:
+    //    (0,5) +-----------+  (10,5)
+    //          |           |
+    //    (0,0) +-----------+  (10,0)
+    //
+    struct rectangle rettangolo = {{10, 5}, {0, 5}, {0, 0}, {10, 0}};
+    printf("\n----------\n");
+    printf("Coordinate del rettangolo:\n");
+    printf("\t(%d, %d) +----------+ (%d, %d)\n", rettangolo.top_left.x, rettangolo.top_left.y, rettangolo.top_right.x, rettangolo.top_left.y);
+    printf("\t       |          |\n");
+    printf("\t(%d, %d) +----------+ (%d, %d)\n", rettangolo.bottom_left.x, rettangolo.bottom_left.y, rettangolo.bottom_right.x, rettangolo.bottom_right.y);
+
+    // Array come membri di strutture
+    //
+    struct Dado {
+        int possibiliValori[6];
+        int numeriEstratti[300]; // Tiene traccia dello storico dei numeri estratti
+        int indiceUltimoNumero;
+    };
+    struct Dado dado = {{1,2,3,4,5,6}, {4,3,2,5,1,6,6,4,3,2,4,1,2}, 13};
+    printf("\n----------\n");
+    printf("Il dado creato ha 6 possibili valori, ecco gli ultimi valori estratti:\n\t");
+    for(int i=0; i<dado.indiceUltimoNumero; i++){
+        printf("%d ", dado.numeriEstratti[i]);
+    }
+    // FINGIAMO che sia stato estratto un nuovo valore pari a 5, e lo aggiungiamo.
+    dado.numeriEstratti[dado.indiceUltimoNumero]= 5; 
+    dado.indiceUltimoNumero= dado.indiceUltimoNumero + 1; // Aggiorniamo l'indice dell'ultimo numero
+    printf("\n\nIl dado aggiornato con l'estrazione del numero 5:\n\t");
+    for(int i=0; i<dado.indiceUltimoNumero; i++){
+        printf("%d ", dado.numeriEstratti[i]);
+    }
+    
+    printf("\n\n");
     return 0;
 }
 

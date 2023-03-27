@@ -50,7 +50,7 @@ int main(){
     // NOTA IMPORTANTE:  DIFFERENZA TRA ARRAY DI STRINGHE E PUNTATORI
     //
     // se si definisce un array di caratteri (e.g. char arr[25]) 
-    // è possibile assegnargli una stringa "costante" SOLO durante la dichiarazione
+    // è possibile assegnargli una STRINGA COSTANTE SOLO durante la dichiarazione
     //
     char nome[25] = "Pierfrancesco"; // VALIDO
     char cognome[25];

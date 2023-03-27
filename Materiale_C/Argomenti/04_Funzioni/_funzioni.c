@@ -5,8 +5,23 @@
     // File creato il 26/03/2023 da Xavier Perani
     // 
     // =========================================================
+
+    int somma(int a, int b) {
+        return a+b;
+    }
+    int somma(char a) {
+        printf("hi");
+    }
     
-    
+    // =============================================================
+    // Non è possibile definire un'altra funzione con lo stesso nome:
+    // 
+    //      int somma(int a, int b, int c) {
+    //          return a+b+c;
+    //      }
+    //
+    // Causa errore eseguire questa definizione
+    // =============================================================
     int main(){
         printf("\n\n|----------->\n");
         printf("|===>\tFILE: _funzioni.c\n");
